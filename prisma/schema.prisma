@@ -1,0 +1,100 @@
+// Prisma schema — Website Profile Kampus STIKOM Jimbaran
+// Referensi arsitektur: mengikuti pola project Smartify (Next.js + Prisma + MySQL)
+
+generator client {
+  provider        = "prisma-client-js"
+  binaryTargets   = ["native", "linux-musl-openssl-3.0.x"] // kompatibel Docker Alpine
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  SUPER_ADMIN
+  AKADEMIK
+  KESEKRETARIATAN
+  KEMAHASISWAAN
+}
+
+model User {
+  id            String   @id @default(cuid())
+  name          String
+  email         String   @unique
+  passwordHash  String
+  role          Role     @default(AKADEMIK)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  guidelines    Guideline[]
+  announcements Announcement[]
+}
+
+model Category {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  slug        String   @unique
+  description String?  @db.Text
+  icon        String?  // nama icon lucide-react, mis. "DoorOpen"
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+
+  guidelines  Guideline[]
+}
+
+model Guideline {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  summary     String   @db.Text          // ringkasan singkat untuk card/list
+  content     String   @db.Text          // konten lengkap (markdown)
+  steps       Json                       // array of { order, text }
+  isPublished Boolean  @default(true)
+  viewCount   Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  category    Category @relation(fields: [categoryId], references: [id])
+  categoryId  String
+
+  author      User     @relation(fields: [authorId], references: [id])
+  authorId    String
+
+  contacts    Contact[]
+  documents   Document[]
+}
+
+model Contact {
+  id           String   @id @default(cuid())
+  name         String
+  position     String   // jabatan, mis. "Staff Kesekretariatan"
+  unit         String   // mis. "Bagian Akademik"
+  whatsapp     String?
+  email        String?
+  room         String?  // lokasi ruangan, mis. "Gedung A, Lt. 1"
+
+  guideline    Guideline @relation(fields: [guidelineId], references: [id], onDelete: Cascade)
+  guidelineId  String
+}
+
+model Document {
+  id           String   @id @default(cuid())
+  title        String   // mis. "Formulir Peminjaman Ruangan"
+  fileUrl      String   // path/URL file yang bisa diunduh
+  fileType     String   @default("pdf") // pdf | docx | xlsx
+
+  guideline    Guideline @relation(fields: [guidelineId], references: [id], onDelete: Cascade)
+  guidelineId  String
+}
+
+model Announcement {
+  id        String   @id @default(cuid())
+  title     String
+  body      String   @db.Text
+  isPinned  Boolean  @default(false)
+  publishedAt DateTime @default(now())
+
+  author    User     @relation(fields: [authorId], references: [id])
+  authorId  String
+}
