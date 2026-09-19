@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { Calendar, Globe, MapPin, ArrowRight, CheckCircle2 } from "lucide-react";
 
 const gelombang = [
