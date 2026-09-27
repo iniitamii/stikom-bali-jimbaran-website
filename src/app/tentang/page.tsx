@@ -1,9 +1,23 @@
+import Image from "next/image";
 import { GraduationCap, Target, Eye, Award, Globe2 } from "lucide-react";
 
 const partners = [
-  "HELP University", "AirAsia Ride", "Tokopedia", "Indodax", "Biznet",
-  "EVOS", "The Apurva Kempinski Bali", "Cakap", "ESL", "HP",
-  "AMD", "KB Bukopin", "Angkasa Pura Airports", "Telkomsel", "AWS",
+  "HELP University Malaysia", "Dalian Neusoft University (China)", "Universitas Teknologi Bandung",
+  "AirAsia Ride", "Tokopedia", "Indodax", "Biznet", "EVOS",
+  "The Apurva Kempinski Bali", "Cakap", "ESL", "HP",
+  "AMD", "Angkasa Pura Airports", "Telkomsel", "AWS",
+];
+
+const gallery = [
+  { src: "/images/fasilitas/gedung-kampus.jpg", label: "Gedung Kampus" },
+  { src: "/images/fasilitas/ruang-kelas.jpg", label: "Ruang Kelas" },
+  { src: "/images/fasilitas/aula.jpg", label: "Main Hall (Aula)" },
+  { src: "/images/fasilitas/lab-komputer.jpg", label: "Lab Komputer" },
+  { src: "/images/fasilitas/perpustakaan.jpg", label: "Perpustakaan" },
+  { src: "/images/fasilitas/front-office.jpg", label: "Front Office" },
+  { src: "/images/fasilitas/cafe.jpg", label: "After Class Cafe" },
+  { src: "/images/fasilitas/ruang-presenter.jpg", label: "Ruang Presenter" },
+  { src: "/images/fasilitas/ruang-akademik.jpg", label: "Ruang Akademik" },
 ];
 
 export default function TentangPage() {
@@ -16,12 +30,16 @@ export default function TentangPage() {
         Institut Teknologi &amp; Bisnis STIKOM Bali — Kampus Jimbaran
       </h1>
       <p className="mt-4 text-slate-600 leading-relaxed">
-        STIKOM Jimbaran merupakan bagian dari Institut Teknologi &amp; Bisnis
-        (ITB) STIKOM Bali yang berfokus pada pengembangan pendidikan tinggi di
-        bidang teknologi informasi dan bisnis digital. Sebagai bagian dari
-        program Kampus Merdeka, kampus ini berkomitmen mencetak lulusan yang
-        siap berkontribusi di industri digital, baik secara nasional maupun
-        internasional.
+        Kampus IT pertama dan terbaik di Bali, berdiri pada tahun 2002 dan
+        hadir dengan kampus kedua di kawasan pariwisata Jimbaran. Kampus
+        Jimbaran merupakan gedung kampus International ITB STIKOM Bali yang
+        dibuka pada tahun 2015.
+      </p>
+      <p className="mt-3 text-slate-600 leading-relaxed">
+        Dengan <strong>dual degree program</strong> serta{" "}
+        <strong>Kelas Bisnis Jimbaran</strong> sebagai keunggulannya, membuat
+        ITB STIKOM Bali Kampus Jimbaran ini menjadi sebuah ekosistem belajar
+        terbaik untuk masa depan para jagoan teknologi Indonesia.
       </p>
 
       <div className="mt-10 grid gap-6 sm:grid-cols-2">
@@ -47,19 +65,44 @@ export default function TentangPage() {
             Kerja Sama Internasional
           </h3>
           <p className="text-sm text-slate-600">
-            Program dual-degree internasional (S.Kom - BIT) bersama HELP
-            University Malaysia, dan dual-degree nasional (S.Kom - S.Ds)
-            bersama STT Bandung.
+            Dual-degree dengan HELP University Malaysia (Sistem Informasi,
+            S.Kom-BIT), Dalian Neusoft University China (Bisnis Digital,
+            S.Bns-BM), dan dual-degree nasional dengan Universitas Teknologi
+            Bandung (Sistem Informasi &amp; DKV, S.Kom-S.Ds).
           </p>
         </div>
         <div className="rounded-xl border border-slate-200 p-6">
           <GraduationCap className="mb-3 text-blue-700" size={28} />
           <h3 className="mb-2 font-semibold text-slate-900">Fasilitas</h3>
           <p className="text-sm text-slate-600">
-            Ruang kelas modern, laboratorium komputer & robotika,
-            perpustakaan, dan ruang kegiatan mahasiswa yang mendukung
-            kreativitas dan kolaborasi.
+            Ruang kelas ber-AC (36 orang/kelas), Main Hall berkapasitas 200
+            orang, lab komputer, perpustakaan, lift, dan ruang kegiatan
+            mahasiswa lainnya.
           </p>
+        </div>
+      </div>
+
+      {/* Galeri Fasilitas */}
+      <div className="mt-12">
+        <h2 className="mb-5 text-lg font-semibold text-slate-900">
+          Galeri Fasilitas Kampus
+        </h2>
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
+          {gallery.map(({ src, label }) => (
+            <div key={src} className="group overflow-hidden rounded-xl border border-slate-200">
+              <div className="relative aspect-[4/3] w-full overflow-hidden">
+                <Image
+                  src={src}
+                  alt={label}
+                  fill
+                  className="object-cover transition group-hover:scale-105"
+                />
+              </div>
+              <p className="border-t border-slate-100 px-3 py-2 text-center text-xs font-medium text-slate-700">
+                {label}
+              </p>
+            </div>
+          ))}
         </div>
       </div>
 

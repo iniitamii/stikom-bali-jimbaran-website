@@ -1,4 +1,4 @@
-import { Calendar, Globe, MapPin, ArrowRight, CheckCircle2 } from "lucide-react";
+import { Calendar, Globe, MapPin, ArrowRight, CheckCircle2, FileCheck } from "lucide-react";
 
 const gelombang = [
   { nama: "Khusus", periode: "10 Nov 2024 – 4 Jan 2025" },
@@ -29,6 +29,22 @@ const alurOffline = [
   "Tunggu dihubungi via WhatsApp untuk mengikuti tes online dan tes wawancara.",
   "Setelah mengikuti kedua tes, tunggu pengumuman kelulusan dan rincian biaya registrasi akhir.",
   "Setelah membayar registrasi akhir, kamu akan mendapat NIM dan resmi menjadi mahasiswa baru.",
+];
+
+const syaratUmum = [
+  "Fotokopi Ijazah SMA/MA/SMK atau sederajat (legalisir), atau Surat Keterangan Lulus (SKL) bagi lulusan tahun berjalan",
+  "Fotokopi Transkrip Nilai/Rapor (legalisir)",
+  "Fotokopi KTP calon mahasiswa (bagi yang belum memiliki, bisa menggunakan Kartu Keluarga)",
+  "Fotokopi Kartu Keluarga (KK)",
+  "Pas foto berwarna terbaru, ukuran 3x4 (2 lembar)",
+  "Bukti pembayaran biaya pendaftaran sesuai gelombang",
+];
+
+const syaratKhusus = [
+  { program: "Dual-Degree Internasional", ket: "Tambahan: sertifikat kemampuan bahasa Inggris (jika ada), mengikuti ketentuan dari HELP University Malaysia / Dalian Neusoft University" },
+  { program: "Dual-Degree Nasional", ket: "Tambahan: mengikuti ketentuan seleksi dari Universitas Teknologi Bandung (UTB)" },
+  { program: "Kelas Bisnis Jimbaran", ket: "Tambahan: surat keterangan kerja/menjabat (bagi yang sudah bekerja)" },
+  { program: "Program Magister (S2)", ket: "Fotokopi ijazah & transkrip S1 (legalisir), bukan ijazah SMA/SMK" },
 ];
 
 const biayaSarjana = [
@@ -200,6 +216,41 @@ export default function PendaftaranPage() {
             ))}
           </ol>
         </div>
+      </section>
+
+      {/* Syarat Pendaftaran */}
+      <section className="mt-12">
+        <div className="mb-4 flex items-center gap-2">
+          <FileCheck className="text-blue-700" size={22} />
+          <h2 className="text-lg font-semibold text-slate-900">
+            Syarat Pendaftaran
+          </h2>
+        </div>
+
+        <div className="rounded-xl border border-slate-200 p-5">
+          <h3 className="mb-3 font-semibold text-slate-900">Dokumen Umum (Semua Program Sarjana)</h3>
+          <ul className="space-y-2">
+            {syaratUmum.map((item, i) => (
+              <li key={i} className="flex gap-3 text-sm text-slate-600">
+                <CheckCircle2 size={16} className="mt-0.5 shrink-0 text-blue-700" />
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="mt-4 grid gap-4 sm:grid-cols-2">
+          {syaratKhusus.map((s) => (
+            <div key={s.program} className="rounded-xl border border-slate-200 p-4">
+              <p className="mb-1 text-sm font-semibold text-slate-900">{s.program}</p>
+              <p className="text-xs text-slate-600">{s.ket}</p>
+            </div>
+          ))}
+        </div>
+
+        <p className="mt-4 text-xs italic text-slate-400">
+          *Syarat dapat berubah sewaktu-waktu. Konfirmasi ke bagian Pemasaran (WA: 0811-388-1288) untuk info terbaru.
+        </p>
       </section>
 
       {/* Rincian Biaya Sarjana */}

@@ -1,37 +1,33 @@
-import {
-  CodeIcon,
-  CpuIcon,
-  SmartphoneIcon,
-  BriefcaseIcon,
-  GraduationCapIcon,
-  UsersIcon,
-  GlobeIcon,
-} from "@/components/icons";
+import { Code, Cpu, Smartphone, Briefcase, GraduationCap, Users, Globe } from "lucide-react";
 
 const sarjana = [
   {
     name: "Sistem Informasi",
     gelar: "S.Kom",
-    icon: CodeIcon,
-    desc: "Berfokus pada pengembangan software, website, hingga multimedia kreatif.",
+    icon: Code,
+    desc: "Fokus pengembangan software dan multimedia kreatif: Developing Website, Creating UI, Designing UX, Developing Game.",
+    karir: "System Analyst, System Engineer, Animator, UI/UX Designer, Graphic Designer",
   },
   {
     name: "Sistem Komputer",
     gelar: "S.Kom",
-    icon: CpuIcon,
-    desc: "Berfokus pada pengembangan networking, robotika, dan sistem terintegrasi.",
+    icon: Cpu,
+    desc: "Fokus pengembangan Robotic dan Internet of Things (IoT): Cloud Computing, Algorithm, Struktur Data, Implementasi Mikrokontroler, Control System.",
+    karir: "Hardware Engineer, Robotica, Smart System Developer, Data Scientist, System Integrator",
   },
   {
     name: "Teknologi Informasi",
     gelar: "S.Kom",
-    icon: SmartphoneIcon,
-    desc: "Berfokus pada sistem mobile dan pengembangan teknologi Internet of Things (IoT).",
+    icon: Smartphone,
+    desc: "Fokus pengembangan Networking, Cyber Security dan Cyber Forensic: Operation System, Matematika Diskrit, Jaringan Komputer, Cryptography, Ethical Hacking.",
+    karir: "Security Analyst, Network Engineer, Cyber Security",
   },
   {
     name: "Bisnis Digital",
     gelar: "S.Bis",
-    icon: BriefcaseIcon,
-    desc: "Berfokus pada pengembangan bisnis berbasis digital dan digital marketing.",
+    icon: Briefcase,
+    desc: "Fokus perancangan & pengembangan bisnis berbasis teknologi digital: Technopreneurship, E-Commerce, Ekonomi Digital, Digital Marketing.",
+    karir: "Digital Marketing Consultant, Digital Business Data Analyst, Entrepreneur, Project Manager",
   },
 ];
 
@@ -44,23 +40,28 @@ const magister = {
 const kelas = [
   {
     name: "Kelas Reguler",
-    icon: UsersIcon,
+    icon: Users,
     desc: "Program reguler dengan pilihan kelas pagi-siang maupun sore-malam, untuk mahasiswa yang fokus kuliah seperti biasa.",
   },
   {
     name: "Kelas Bisnis Jimbaran",
-    icon: BriefcaseIcon,
-    desc: "Pilihan bagi para eksekutif untuk memudahkan kuliah sambil bekerja guna meningkatkan karier.",
+    icon: Briefcase,
+    desc: "Kuliah sambil bekerja dengan sistem perkuliahan fleksibel berbasis e-learning — solusi untuk eksekutif muda yang ingin meningkatkan jenjang karier.",
   },
   {
-    name: "Dual-Degree Internasional",
-    icon: GlobeIcon,
-    desc: "Program dua gelar (S.Kom - BIT) hasil kerja sama dengan HELP University Malaysia.",
+    name: "Dual-Degree Internasional — HELP University Malaysia",
+    icon: Globe,
+    desc: "Program studi Sistem Informasi dengan gelar S.Kom - BIT, dapatkan 2 gelar dalam satu waktu yang sama.",
   },
   {
-    name: "Dual-Degree Nasional",
-    icon: GraduationCapIcon,
-    desc: "Program dua gelar (S.Kom - S.Ds) hasil kerja sama dengan STT Bandung.",
+    name: "Dual-Degree Internasional — Dalian Neusoft University (China)",
+    icon: Globe,
+    desc: "Program studi Bisnis Digital dengan gelar S.Bns - BM, dapatkan 2 gelar dalam sekali tempuh.",
+  },
+  {
+    name: "Dual-Degree Nasional — Universitas Teknologi Bandung (UTB)",
+    icon: GraduationCap,
+    desc: "Gabungan program studi Sistem Informasi dan DKV dengan gelar S.Kom - S.Ds, hasil kerja sama dengan UTB.",
   },
 ];
 
@@ -84,7 +85,7 @@ export default function ProgramStudiPage() {
         Program Sarjana (S1)
       </h2>
       <div className="grid gap-6 md:grid-cols-2">
-        {sarjana.map(({ name, gelar, icon: Icon, desc }) => (
+        {sarjana.map(({ name, gelar, icon: Icon, desc, karir }) => (
           <div key={name} className="rounded-xl border border-slate-200 p-6">
             <div className="mb-4 flex items-center justify-between">
               <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-blue-50 text-blue-700">
@@ -96,6 +97,10 @@ export default function ProgramStudiPage() {
             </div>
             <h3 className="mb-2 font-semibold text-slate-900">{name}</h3>
             <p className="text-sm text-slate-600">{desc}</p>
+            <p className="mt-3 text-xs text-slate-500">
+              <span className="font-medium text-slate-700">Peluang karier: </span>
+              {karir}
+            </p>
           </div>
         ))}
       </div>
@@ -107,7 +112,7 @@ export default function ProgramStudiPage() {
       <div className="rounded-xl border border-slate-200 p-6">
         <div className="mb-4 flex items-center justify-between">
           <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-blue-50 text-blue-700">
-            <GraduationCapIcon size={22} />
+            <GraduationCap size={22} />
           </span>
           <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-600">
             Gelar {magister.gelar}
